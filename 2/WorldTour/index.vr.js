@@ -3,18 +3,24 @@ import {View , Text, Pano, AppRegistry, asset, StyleSheet} from 'react-vr';
 
 
 const places = [{
-   title: 'Island Paradise'
+   title: 'Island Paradise',
+   image:'island-garden.jpg'
 },
  {
-   title: 'Starry Nights'
+   title: 'Starry Nights',
+   image:'starry-sky.jpg'
+
 
  },
  {
-   title: 'Winter Outdoors'
+   title: 'Winter Outdoors',
+   image:'winter-outdoor.jpg'
 
  },
  {
-   title: 'Light Shows'
+   title: 'Light Shows',
+   image:'light-show.jpg'
+
 
  }
 ]
@@ -24,7 +30,8 @@ constructor()
 {
   super();
   this.state = {
-    showMenu: false
+    showMenu: false,
+    place: "starry-sky.jpg"
   }
 }
 
@@ -35,7 +42,7 @@ toggleMenu() {
 render() {
   return(
     <View>
-     <Pano source={asset('starry-sky.jpg')}></Pano>
+     <Pano source={asset(this.state.place)}></Pano>
      <View
      style={styles.menuButton}
      onEnter = {() => this.toggleMenu()}>
@@ -49,7 +56,8 @@ render() {
               return (
                 <View
 style={styles.menuItem}
-                key={index}>
+                key={index}
+                onEnter={()=>this.setState({place: place.image})}>
                 <Text
                 style={styles.menuItemText}
                 >{place.title }</Text>
