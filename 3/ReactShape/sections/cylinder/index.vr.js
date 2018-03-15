@@ -1,5 +1,5 @@
 import React , {Component} from 'react';
-import {AppRegistry, asset , Pano, View , Text, StyleSheet, Cylinder, Box, Sphere } from 'react-vr';
+import {AppRegistry, asset , Pano, View , Text, StyleSheet, Cylinder, Box } from 'react-vr';
 
 
 
@@ -61,25 +61,7 @@ style={{
 
    />
 
-<Sphere
-   radius ={0.5}
-  widthSegments={10}
-  wireframe={true}
-  texture={'http://i.imgur.com/bEBqA.jpg'}
-  style={{
-    color:"#aad",
-    transform:[{
-      translate: [1,0,-3]
-    },
-      {
-      rotateY: 45
-    },
-    {
-      rotateZ: 45
-    }
-  ]
-  }}
-    />
+
      </View>
 
    )
