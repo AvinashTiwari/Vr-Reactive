@@ -1,34 +1,37 @@
-import React from 'react';
-import {
-  AppRegistry,
-  asset,
-  Pano,
-  Text,
-  View,
-} from 'react-vr';
+import React, {Component} from 'react';
+import {View , Text,AppRegistry,StyleSheet } from 'react-vr'
 
-export default class ShapeGame extends React.Component {
+import Shape from './vr/components/Shape';
+
+class ShapeGame extends Component {
+
+constructor(){
+  super();
+  this.state = {
+    gamesShape: [1,1,1,1]
+  }
+}
+
   render() {
     return (
       <View>
-        <Pano source={asset('chess-world.jpg')}/>
-        <Text
-          style={{
-            backgroundColor: '#777879',
-            fontSize: 0.8,
-            fontWeight: '400',
-            layoutOrigin: [0.5, 0.5],
-            paddingLeft: 0.2,
-            paddingRight: 0.2,
-            textAlign: 'center',
-            textAlignVertical: 'center',
-            transform: [{translate: [0, 0, -3]}],
-          }}>
-          hello
-        </Text>
+        <Text style={styles.text}>Find Odd Shape Now!</Text>
+        <Shape shapeNum={1}
+                transform={[{translate:[0,0,-5]}]}/>
       </View>
-    );
+    )
   }
-};
+}
 
-AppRegistry.registerComponent('ShapeGame', () => ShapeGame);
+const styles = StyleSheet.create({
+  text: {
+    fontSize: 0.5,
+    textAlign:'center',
+    color: '#fff',
+    transform: [{
+      translate:[0,2,-5]
+    }]
+  }
+})
+
+AppRegistry.registerComponent('ShapeGame', ()=> ShapeGame);
