@@ -8,22 +8,41 @@ class ShapeGame extends Component {
 constructor(){
   super();
   this.state = {
-    gamesShape: [1,1,1,1]
+    gamesShapes: [1, 1, 1, 1]
   }
 }
 
   render() {
     return (
-      <View>
+      <View style={styles.game}>
         <Text style={styles.text}>Find Odd Shape Now!</Text>
-        <Shape shapeNum={1}
-                transform={[{translate:[0,0,-5]}]}/>
+      {
+        this.state.gamesShapes.map((shape,index) => {
+          return(
+          <View key={index}>
+          <Shape
+            shapeNum={shape}
+            colorNum={index}
+            transform={[{translate:[(index-1.5)*1.5 , 0 , -5]}]}
+          />
+          </View>
+           )
+        })
+      }
       </View>
     )
   }
 }
 
 const styles = StyleSheet.create({
+game: {
+transform: [
+  {
+    translate:[-2.25, 0 , 0]
+  }
+]
+},
+
   text: {
     fontSize: 0.5,
     textAlign:'center',
