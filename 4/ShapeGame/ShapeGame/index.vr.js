@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {View , Text,AppRegistry,StyleSheet } from 'react-vr'
 
-import Shape from './vr/components/Shape';
+import Shape , {shapes} from './vr/components/Shape';
 
 class ShapeGame extends Component {
 
@@ -12,16 +12,49 @@ constructor(){
   }
 }
 
+componentDidMount(){
+  this.newGameSet();
+}
+newGameSet(){
+ console.log("New Gamet set");
+ let baseShapeId = Math.floor(Math.random() * shapes.length);
+ console.log(baseShapeId);
+
+ let specialSapeId = baseShapeId;
+
+ while(specialSapeId === baseShapeId)
+ {
+   specialSapeId = Math.floor(Math.random() * shapes.length);
+ }
+
+ console.log(specialSapeId);
+
+let newGameShape =[];
+for(let i=0 ; i< this.state.gamesShapes.length; i++)
+{
+  newGameShape[i] = baseShapeId;
+}
+
+console.log(newGameShape);
+
+let specialIndex = Math.floor(Math.random() * newGameShape.length);
+newGameShape[specialIndex]  = specialSapeId;
+
+console.log(newGameShape);
+this.setState({gamesShapes: newGameShape})
+
+}
+
   render() {
     return (
       <View style={styles.game}>
         <Text style={styles.text}>Find Odd Shape Now!</Text>
       {
-        this.state.gamesShapes.map((shape,index) => {
+        this.state.gamesShapes.map((shapes,index) => {
           return(
           <View key={index}>
           <Shape
-            shapeNum={shape}
+            shapeNum={shapes}
             colorNum={index}
             transform={[{translate:[(index-1.5)*1.5 , 0 , -5]}]}
           />
