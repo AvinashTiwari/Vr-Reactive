@@ -8,13 +8,29 @@ class ShapeGame extends Component {
 constructor(){
   super();
   this.state = {
-    gamesShapes: [1, 1, 1, 1]
+    gamesShapes: [1, 1, 1, 1],
+    score: 0,
+    specialIndex: 0
   }
 }
 
 componentDidMount(){
   this.newGameSet();
 }
+
+pickShape(shapeIndex)
+{
+  console.log('Shape Index', shapeIndex)
+  let score = this.state.score;
+
+  score = this.state.specialIndex === shapeIndex ? score + 1 : score -1;
+
+  this.setState({score});
+
+  this.newGameSet();
+}
+
+
 newGameSet(){
  console.log("New Gamet set");
  let baseShapeId = Math.floor(Math.random() * shapes.length);
@@ -41,7 +57,10 @@ let specialIndex = Math.floor(Math.random() * newGameShape.length);
 newGameShape[specialIndex]  = specialSapeId;
 
 console.log(newGameShape);
-this.setState({gamesShapes: newGameShape})
+this.setState({
+  gamesShapes: newGameShape,
+  specialIndex:specialIndex
+ })
 
 }
 
@@ -49,10 +68,14 @@ this.setState({gamesShapes: newGameShape})
     return (
       <View style={styles.game}>
         <Text style={styles.text}>Find Odd Shape Now!</Text>
+        <Text style={styles.text}>{this.state.score}</Text>
+
       {
         this.state.gamesShapes.map((shapes,index) => {
           return(
-          <View key={index}>
+          <View key={index}
+          onEnter={() => this.pickShape(index)}
+          >
           <Shape
             shapeNum={shapes}
             colorNum={index}
