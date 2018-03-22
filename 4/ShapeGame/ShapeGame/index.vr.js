@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View , Text,AppRegistry,StyleSheet } from 'react-vr'
+import {View , Text,AppRegistry,StyleSheet, AsyncStorage } from 'react-vr'
 
 import Shape , {shapes} from './vr/components/Shape';
 
@@ -15,6 +15,12 @@ constructor(){
 }
 
 componentDidMount(){
+  AsyncStorage.getItem('score').then(value => {
+    console.log('Score', value);
+    this.setState({score: value});
+
+  });
+
   this.newGameSet();
 }
 
@@ -26,6 +32,8 @@ pickShape(shapeIndex)
   score = this.state.specialIndex === shapeIndex ? score + 1 : score -1;
 
   this.setState({score});
+
+   AsyncStorage.setItem('score', score);
 
   this.newGameSet();
 }
